@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "index": "node index.js",
-    "search": "node search.js"
+    "index": "node src/index.js",
+    "search": "node src/search.js"
   },
   "keywords": [],
   "type": "module",
