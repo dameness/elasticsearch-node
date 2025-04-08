@@ -16,7 +16,15 @@ const db = new pg.Pool({
 async function indexProducts() {
   try {
     const productsQuery = `
-      SELECT p.cd_produto, p.nm_produto, m.nm_marca
+      SELECT p.cd_produto, p.nm_produto, m.nm_marca,
+             COALESCE((SELECT ds_imagem
+                         FROM produto_imagem pim
+                        WHERE pim.cd_produto = p.cd_produto
+                        LIMIT 1),
+                      (SELECT 'https://veplex-imagens.s3.sa-east-1.amazonaws.com/produto/' || ds_codigo || '/' || ds_codigo || '.jpg'
+                         FROM produto_unidade
+                        WHERE cd_produto = p.cd_produto
+                        LIMIT 1)) AS ds_imagem_produto
         FROM produto p
         JOIN fabricante f ON f.cd_fabricante = p.cd_fabricante
         JOIN marca m ON m.cd_marca = f.cd_marca
@@ -37,6 +45,7 @@ async function indexProducts() {
         cd_produto: row.cd_produto,
         nm_produto: row.nm_produto,
         nm_marca: row.nm_marca,
+        ds_imagem_produto: row.ds_imagem_produto,
       });
 
       i++;
