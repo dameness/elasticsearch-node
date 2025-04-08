@@ -16,7 +16,7 @@ const db = new pg.Pool({
 async function indexProducts() {
   try {
     const productsQuery = `
-      SELECT p.cd_produto, p.nm_produto, m.cd_marca
+      SELECT p.cd_produto, p.nm_produto, m.nm_marca
         FROM produto p
         JOIN fabricante f ON f.cd_fabricante = p.cd_fabricante
         JOIN marca m ON m.cd_marca = f.cd_marca
@@ -36,7 +36,7 @@ async function indexProducts() {
       bulkBody.push({
         cd_produto: row.cd_produto,
         nm_produto: row.nm_produto,
-        cd_marca: row.cd_marca,
+        nm_marca: row.nm_marca,
       });
 
       i++;
