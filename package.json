@@ -1,0 +1,19 @@
+{
+  "name": "elasticsearch-node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "index": "node index.js",
+    "search": "node search.js"
+  },
+  "keywords": [],
+  "type": "module",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@elastic/elasticsearch": "^8.17.1",
+    "dotenv": "^16.4.7",
+    "pg": "^8.14.1"
+  }
+}
